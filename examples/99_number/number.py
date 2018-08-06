@@ -1,28 +1,3 @@
-"""
-tf.nn.conv2d(
-    input,
-    filter,
-    strides,
-    padding,
-    use_cudnn_on_gpu=True,
-    data_format='NHWC',
-    dilations=[1, 1, 1, 1],
-    name=None
-)
-
-Computes a 2-D convolution given 4-D input and filter tensors.
-
-Given an input tensor of shape [batch, in_height, in_width, in_channels]
-and a filter / kernel tensor of shape [filter_height, filter_width, in_channels, out_channels],
-
-this op performs the following:
-
-1. Flattens the filter to a 2-D matrix with shape [filter_height * filter_width * in_channels, output_channels].
-2. Extracts image patches from the input tensor to form a virtual tensor of shape
-    [batch, out_height, out_width, filter_height * filter_width * in_channels].
-3. For each patch, right-multiplies the filter matrix and the image patch vector.
-"""
-
 import tensorflow as tf
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
@@ -31,8 +6,8 @@ import random
 
 mnist = input_data.read_data_sets('MNIST_data/', one_hot=True)
 
-X = tf.placeholder(tf.float32, shape=[None, 784])
-Y = tf.placeholder(tf.float32, shape=[None, 10])
+X = tf.placeholder(tf.float32, shape=[None, 1000])
+Y = tf.placeholder(tf.float32, shape=[None, 2])
 
 X_img = tf.reshape(X, [-1, 28, 28, 1])
 F1 = tf.Variable(tf.random_normal([3, 3, 1, 32], stddev=0.01))

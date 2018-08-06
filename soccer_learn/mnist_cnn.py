@@ -65,4 +65,8 @@ class Model:
     def predict(self, x_test, training=False):
         return self.sess.run(self.logits, feed_dict={self.X: x_test, self.training: training})
     
-    def g
+    def get_accuracy(self, x_test, y_test, training=False):
+        return self.sess.run(self.accuracy, feed_dict={self.X: x_test, self.Y: y_test, self.training: training})
+
+    def train(self, x_data, y_data, training=True):
+        return self.sess.run([self.cost, self.optimizer], feed_dict={self.X: x_data, self.Y: y_data, self.training: training})
